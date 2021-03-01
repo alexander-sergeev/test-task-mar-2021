@@ -1,10 +1,12 @@
 import React from 'react';
+import { Trans } from 'react-i18next';
+import CentredMessage from '../../components/CentredMessage/CentredMessage';
 
 function Home() {
   return (
-    <>
-      404 | Page not found
-    </>
+    <CentredMessage>
+      <Trans>Error 404</Trans>
+    </CentredMessage>
   );
 }
 

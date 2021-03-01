@@ -11,6 +11,7 @@ i18n
           'Login link': 'Login',
           'Your position on map': 'Your current geoposition',
           'Allow access to geolocation': 'Please, allow access to your geolocation',
+          'Error 404': 'Page not found | Error 404',
         }
       }
     },
