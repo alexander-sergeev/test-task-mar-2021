@@ -10,7 +10,7 @@ import {
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Layout className="layout">

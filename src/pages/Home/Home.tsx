@@ -2,14 +2,14 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from '../../components/MapMarker/MapMarker';
 import { useTranslation } from 'react-i18next';
-import { useGeolocation } from '../../hooks/useGeolocation';
+import useGeolocation from '../../hooks/useGeolocation';
 import CentredMessage from '../../components/CentredMessage/CentredMessage';
 import googleMapReact from 'google-map-react';
 
 const MAP_ZOOM = 11;
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string;
 
-function Home() {
+const Home = () => {
   const { t } = useTranslation();
 
   const geo = useGeolocation();

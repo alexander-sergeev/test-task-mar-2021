@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from 'react-i18next';
 import CentredMessage from '../../components/CentredMessage/CentredMessage';
 
-function Home() {
+const Error404 = () => {
   return (
     <CentredMessage>
       <Trans>Error 404</Trans>
@@ -11,4 +11,4 @@ function Home() {
 }
 
 
-export default Home;
+export default Error404;

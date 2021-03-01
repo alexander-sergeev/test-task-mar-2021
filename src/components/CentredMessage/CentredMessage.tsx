@@ -1,7 +1,7 @@
 import React from 'react';
 import './CentredMessage.css';
 
-export interface CentredMessageProps {
+export type CentredMessageProps = {
   children: React.ReactNode;
 }
 

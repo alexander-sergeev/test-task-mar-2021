@@ -15,7 +15,7 @@ const langMenu = (
   </Menu>
 );
 
-function Navbar() {
+const Navbar = () => {
   return (
     <>
       <Row>

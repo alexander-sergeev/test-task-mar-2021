@@ -51,5 +51,5 @@ const useGeolocation = (): GeolocationState => {
   return state;
 }
 
-export { useGeolocation };
+export default useGeolocation;
 
