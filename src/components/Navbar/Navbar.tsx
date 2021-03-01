@@ -5,6 +5,7 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { Trans } from 'react-i18next';
 
 const langMenu = (
   <Menu>
@@ -19,11 +20,11 @@ function Navbar() {
     <>
       <Row>
         <Col span={6}>
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[window.location.pathname]}> 
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[window.location.pathname]}>
             <Menu.Item key="/">
               <Link to="/">
                 <HomeOutlined className="home-icon" />
-                Home
+                <Trans>Home link</Trans>
               </Link>
             </Menu.Item>
           </Menu>
@@ -33,7 +34,7 @@ function Navbar() {
             <Dropdown overlay={langMenu} placement="bottomRight" arrow>
               <Button>Lang</Button>
             </Dropdown>
-            <Button type="primary">Login</Button>
+            <Button type="primary"><Trans>Login link</Trans></Button>
           </Space>
         </Col>
       </Row>
