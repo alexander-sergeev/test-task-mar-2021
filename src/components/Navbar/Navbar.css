@@ -1,0 +1,9 @@
+.home-icon {
+  color: white;
+}
+
+.right-pane {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
