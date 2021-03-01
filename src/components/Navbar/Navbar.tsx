@@ -3,6 +3,7 @@ import {
   HomeOutlined,
 } from '@ant-design/icons';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const langMenu = (
@@ -18,9 +19,12 @@ function Navbar() {
     <>
       <Row>
         <Col span={6}>
-          <Menu theme="dark" mode="horizontal">
-            <Menu.Item key="home">
-              <HomeOutlined className="home-icon" />
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[window.location.pathname]}> 
+            <Menu.Item key="/">
+              <Link to="/">
+                <HomeOutlined className="home-icon" />
+                Home
+              </Link>
             </Menu.Item>
           </Menu>
         </Col>
