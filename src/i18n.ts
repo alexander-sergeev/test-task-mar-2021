@@ -9,6 +9,8 @@ i18n
         translation: {
           'Home link': 'Home',
           'Login link': 'Login',
+          'Your position on map': 'Your current geoposition',
+          'Allow access to geolocation': 'Please, allow access to your geolocation',
         }
       }
     },

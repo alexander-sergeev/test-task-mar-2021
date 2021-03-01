@@ -17,7 +17,7 @@ function App() {
         <Layout.Header>
           <Navbar></Navbar>
         </Layout.Header>
-        <Layout.Content className="content">
+        <Layout.Content>
           <Switch>
             <Route exact path="/">
               <Home />
