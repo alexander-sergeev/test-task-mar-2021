@@ -7,15 +7,18 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/google-map-react": "^2.1.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/google-map-react": "^2.1.0",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.13.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "google-map-react": "^2.1.9",
     "i18next": "^19.9.1",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-i18next": "^11.8.8",
@@ -33,7 +36,11 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
     ]
   },
   "browserslist": {
