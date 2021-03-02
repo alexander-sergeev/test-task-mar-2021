@@ -1,6 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { LANGUAGE_INITIAL_STATE } from './contexts/LanguageContext';
+
+const LOCAL_STORAGE_LANG_KEY = 'lang';
+
+const localStorageLang = window.localStorage.getItem(LOCAL_STORAGE_LANG_KEY);
+const browserLang = window.navigator?.language.substr(0, 2).toLowerCase();
+const language = localStorageLang ?? browserLang;
 
 const translations = {
   en: {
@@ -53,7 +58,7 @@ export const LANGUAGES = [
 
 i18n.use(initReactI18next).init({
   resources: translations,
-  lng: LANGUAGE_INITIAL_STATE.language,
+  lng: language,
   fallbackLng: 'en',
 });
 
