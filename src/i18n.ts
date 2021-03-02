@@ -62,4 +62,8 @@ i18n.use(initReactI18next).init({
   fallbackLng: 'en',
 });
 
+i18n.on('languageChanged', (lang) => {
+  localStorage.setItem(LOCAL_STORAGE_LANG_KEY, lang);
+});
+
 export default i18n;
