@@ -9,16 +9,11 @@ const LangSwitcher = () => {
 
   const langMenu = (
     <Menu>
-      {
-        LANGUAGES.map(({ name, code }) =>
-          <Menu.Item onClick={() => changeLang(code)}>
-            {name}
-          </Menu.Item>
-        )
-      }
+      {LANGUAGES.map(({ name, code }) => (
+        <Menu.Item onClick={() => changeLang(code)}>{name}</Menu.Item>
+      ))}
     </Menu>
   );
-
 
   return (
     <Dropdown overlay={langMenu} placement="bottomRight" arrow>
@@ -27,6 +22,6 @@ const LangSwitcher = () => {
       </Button>
     </Dropdown>
   );
-}
+};
 
 export default LangSwitcher;

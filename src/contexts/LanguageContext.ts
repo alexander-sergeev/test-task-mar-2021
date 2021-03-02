@@ -7,4 +7,4 @@ export const LANGUAGE_INITIAL_STATE = {
 
 const LanguageContext = React.createContext(LANGUAGE_INITIAL_STATE);
 
-export default LanguageContext
+export default LanguageContext;

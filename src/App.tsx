@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import './App.css';
 import { Layout } from 'antd';
 import Navbar from './components/Navbar/Navbar';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
-import LanguageContext, { LANGUAGE_INITIAL_STATE } from './contexts/LanguageContext';
+import LanguageContext, {
+  LANGUAGE_INITIAL_STATE,
+} from './contexts/LanguageContext';
 import i18n from './i18n';
 
 const App = () => {
@@ -18,7 +16,7 @@ const App = () => {
   const changeLang = (lang: string) => {
     setState({
       ...state,
-      language: lang
+      language: lang,
     });
     i18n.changeLanguage(lang);
   };
@@ -28,7 +26,8 @@ const App = () => {
       value={{
         ...state,
         changeLang,
-      }}>
+      }}
+    >
       <Router>
         <Layout className="layout">
           <Layout.Header>
@@ -48,7 +47,6 @@ const App = () => {
       </Router>
     </LanguageContext.Provider>
   );
-}
-
+};
 
 export default App;

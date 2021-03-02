@@ -15,11 +15,9 @@ const Home = () => {
   const geo = useGeolocation();
 
   if (!geo.allowed || geo.lat == null || geo.lng == null) {
-    return (
-      <CentredMessage>{t('Allow access to geolocation')}</CentredMessage>
-    );
+    return <CentredMessage>{t('Allow access to geolocation')}</CentredMessage>;
   }
-  
+
   const coords: googleMapReact.Coords = { lat: geo.lat, lng: geo.lng };
   return (
     <GoogleMapReact
@@ -34,7 +32,6 @@ const Home = () => {
       />
     </GoogleMapReact>
   );
-}
-
+};
 
 export default Home;

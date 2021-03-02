@@ -24,24 +24,28 @@ const useGeolocation = (): GeolocationState => {
   useEffect(() => {
     let canceled = false;
 
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-      if (canceled) {
-        return;
-      }
-      setState({
-        allowed: true,
-        lat: coords.latitude,
-        lng: coords.longitude
-      });
-    }, (error) => {
-      if (canceled) {
-        return;
-      }
-      // TODO: Currently it treat any error as user disallowed access, should handle errors properly
-      setState(initialState);
-    }, {
-      enableHighAccuracy: true,
-    });
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        if (canceled) {
+          return;
+        }
+        setState({
+          allowed: true,
+          lat: coords.latitude,
+          lng: coords.longitude,
+        });
+      },
+      (error) => {
+        if (canceled) {
+          return;
+        }
+        // TODO: Currently it treat any error as user disallowed access, should handle errors properly
+        setState(initialState);
+      },
+      {
+        enableHighAccuracy: true,
+      },
+    );
 
     return () => {
       canceled = true;
@@ -49,7 +53,6 @@ const useGeolocation = (): GeolocationState => {
   });
 
   return state;
-}
+};
 
 export default useGeolocation;
-

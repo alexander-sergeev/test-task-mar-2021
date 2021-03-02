@@ -1,6 +1,6 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import { LANGUAGE_INITIAL_STATE } from "./contexts/LanguageContext";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import { LANGUAGE_INITIAL_STATE } from './contexts/LanguageContext';
 
 const translations = {
   en: {
@@ -28,31 +28,33 @@ const translations = {
       'Home link': 'Главная',
       'Login link': 'Войти',
       'Your position on map': 'Ваше текущее местоположение',
-      'Allow access to geolocation': 'Пожалуйста, разрешите доступ к геолокации',
+      'Allow access to geolocation':
+        'Пожалуйста, разрешите доступ к геолокации',
       'Error 404': 'Страница не найдена | Ошибка 404',
       'Change language': 'Сменить язык',
     },
   },
 };
 
-export const LANGUAGES = [{
-  name: 'English',
-  code: 'en',
-}, {
-  name: 'Українська',
-  code: 'ua',
-}, {
-  name: 'Русский',
-  code: 'ru',
-}];
+export const LANGUAGES = [
+  {
+    name: 'English',
+    code: 'en',
+  },
+  {
+    name: 'Українська',
+    code: 'ua',
+  },
+  {
+    name: 'Русский',
+    code: 'ru',
+  },
+];
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: translations,
-    lng: LANGUAGE_INITIAL_STATE.language,
-    fallbackLng: 'en',
-  });
-
+i18n.use(initReactI18next).init({
+  resources: translations,
+  lng: LANGUAGE_INITIAL_STATE.language,
+  fallbackLng: 'en',
+});
 
 export default i18n;

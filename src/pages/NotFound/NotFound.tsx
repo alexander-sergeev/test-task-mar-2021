@@ -8,7 +8,6 @@ const Error404 = () => {
       <Trans>Error 404</Trans>
     </CentredMessage>
   );
-}
-
+};
 
 export default Error404;
