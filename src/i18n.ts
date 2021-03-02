@@ -22,7 +22,7 @@ const translations = {
     translation: {
       'Home link': 'Головна',
       'Login link': 'Увійти',
-      'Your position on map': 'Ваша поточна місце розташування',
+      'Your position on map': 'Ваше поточне місцерозташування',
       'Allow access to geolocation': 'Будь ласка, надайте доступ до геолокації',
       'Error 404': 'Сторінка не знайдена | Помилка 404',
       'Change language': 'Змінити мову',
