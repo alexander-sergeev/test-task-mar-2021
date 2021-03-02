@@ -10,7 +10,9 @@ const LangSwitcher = () => {
   const langMenu = (
     <Menu>
       {LANGUAGES.map(({ name, code }) => (
-        <Menu.Item onClick={() => changeLang(code)}>{name}</Menu.Item>
+        <Menu.Item onClick={() => changeLang(code)} key={code}>
+          {name}
+        </Menu.Item>
       ))}
     </Menu>
   );
