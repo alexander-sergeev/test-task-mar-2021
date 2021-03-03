@@ -1,57 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { Layout } from 'antd';
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
-import LanguageContext, {
-  LANGUAGE_INITIAL_STATE,
-} from './contexts/LanguageContext';
-import i18n from './i18n';
 import { AuthProvider } from './AuthProvider';
 import LoginCallback from './pages/LoginCallback/LoginCallback';
+import { LanguageConsumer, LanguageProvider } from './contexts/LanguageContext';
 
 const App = () => {
-  const [state, setState] = useState(LANGUAGE_INITIAL_STATE);
-
-  const changeLang = (lang: string) => {
-    setState({
-      ...state,
-      language: lang,
-    });
-    i18n.changeLanguage(lang);
-  };
-
   return (
     <AuthProvider>
-      <LanguageContext.Provider
-        value={{
-          ...state,
-          changeLang,
-        }}
-      >
-        <Router>
-          <Layout className="layout">
-            <Layout.Header>
-              <Navbar></Navbar>
-            </Layout.Header>
-            <Layout.Content>
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route exact path="/loginCallback">
-                  <LoginCallback />
-                </Route>
-                <Route path="/">
-                  <NotFound />
-                </Route>
-              </Switch>
-            </Layout.Content>
-          </Layout>
-        </Router>
-      </LanguageContext.Provider>
+      <LanguageProvider>
+        <LanguageConsumer>
+          {() => (
+            <Router>
+              <Layout className="layout">
+                <Layout.Header>
+                  <Navbar></Navbar>
+                </Layout.Header>
+                <Layout.Content>
+                  <Switch>
+                    <Route exact path="/">
+                      <Home />
+                    </Route>
+                    <Route exact path="/loginCallback">
+                      <LoginCallback />
+                    </Route>
+                    <Route path="/">
+                      <NotFound />
+                    </Route>
+                  </Switch>
+                </Layout.Content>
+              </Layout>
+            </Router>
+          )}
+        </LanguageConsumer>
+      </LanguageProvider>
     </AuthProvider>
   );
 };
