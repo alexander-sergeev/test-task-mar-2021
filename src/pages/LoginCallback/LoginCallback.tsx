@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
-import { useAuth } from '../../AuthProvider';
+import { useAuth } from '../../contexts/AuthContext';
 import CentredMessage from '../../components/CentredMessage/CentredMessage';
 
 const LoginCallback = () => {

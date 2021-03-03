@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
-import { AuthProvider } from './AuthProvider';
+import { AuthProvider } from './contexts/AuthContext';
 import LoginCallback from './pages/LoginCallback/LoginCallback';
 import { LanguageConsumer, LanguageProvider } from './contexts/LanguageContext';
 
