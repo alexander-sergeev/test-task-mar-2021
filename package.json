@@ -17,6 +17,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "google-map-react": "^2.1.9",
+    "http-proxy-middleware": "^1.0.6",
     "i18next": "^19.9.1",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
@@ -54,5 +55,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
