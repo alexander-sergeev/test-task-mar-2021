@@ -18,7 +18,7 @@ const LangSwitcher = () => {
   );
 
   return (
-    <Dropdown overlay={langMenu} placement="bottomRight" arrow>
+    <Dropdown overlay={langMenu} placement="bottomCenter" arrow>
       <Button>
         <Trans>Change language</Trans>
       </Button>
