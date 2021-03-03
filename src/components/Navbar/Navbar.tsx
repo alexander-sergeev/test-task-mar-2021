@@ -27,7 +27,9 @@ const Navbar = () => {
         <Space>
           <LangSwitcher></LangSwitcher>
           <Button type="primary">
-            <Trans>Login link</Trans>
+            <a href="/login">
+              <Trans>Login link</Trans>
+            </a>
           </Button>
         </Space>
       </Col>
