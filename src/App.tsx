@@ -9,6 +9,8 @@ import LanguageContext, {
   LANGUAGE_INITIAL_STATE,
 } from './contexts/LanguageContext';
 import i18n from './i18n';
+import { AuthProvider } from './AuthProvider';
+import LoginCallback from './pages/LoginCallback/LoginCallback';
 
 const App = () => {
   const [state, setState] = useState(LANGUAGE_INITIAL_STATE);
@@ -22,30 +24,35 @@ const App = () => {
   };
 
   return (
-    <LanguageContext.Provider
-      value={{
-        ...state,
-        changeLang,
-      }}
-    >
-      <Router>
-        <Layout className="layout">
-          <Layout.Header>
-            <Navbar></Navbar>
-          </Layout.Header>
-          <Layout.Content>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/">
-                <NotFound />
-              </Route>
-            </Switch>
-          </Layout.Content>
-        </Layout>
-      </Router>
-    </LanguageContext.Provider>
+    <AuthProvider>
+      <LanguageContext.Provider
+        value={{
+          ...state,
+          changeLang,
+        }}
+      >
+        <Router>
+          <Layout className="layout">
+            <Layout.Header>
+              <Navbar></Navbar>
+            </Layout.Header>
+            <Layout.Content>
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route exact path="/loginCallback">
+                  <LoginCallback />
+                </Route>
+                <Route path="/">
+                  <NotFound />
+                </Route>
+              </Switch>
+            </Layout.Content>
+          </Layout>
+        </Router>
+      </LanguageContext.Provider>
+    </AuthProvider>
   );
 };
 
