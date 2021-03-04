@@ -8,6 +8,8 @@ import NotFound from './pages/NotFound/NotFound';
 import { AuthProvider } from './contexts/AuthContext';
 import LoginCallback from './pages/LoginCallback/LoginCallback';
 import { LanguageConsumer, LanguageProvider } from './contexts/LanguageContext';
+import Profile from './pages/Profile/Profile';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 const App = () => {
   return (
@@ -28,6 +30,9 @@ const App = () => {
                     <Route exact path="/loginCallback">
                       <LoginCallback />
                     </Route>
+                    <ProtectedRoute exact path="/profile">
+                      <Profile />
+                    </ProtectedRoute>
                     <Route path="/">
                       <NotFound />
                     </Route>
