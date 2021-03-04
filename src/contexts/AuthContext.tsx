@@ -4,10 +4,15 @@ import React, { createContext, useCallback, useContext, useState } from 'react';
 interface AuthContextState {
   authenticated: boolean;
   exchangeCode: (code: string) => Promise<void>;
+  profile?: {
+    name: string;
+    picture: string;
+    locale: string;
+  };
 }
 
 const INITIAL_STATE: AuthContextState = {
-  authenticated: false,
+  authenticated: localStorage.getItem('tokens') !== null,
   exchangeCode: async (code: string) => {},
 };
 
@@ -18,10 +23,10 @@ export type AuthProviderProps = {
 };
 
 export const AuthProvider = (props: AuthProviderProps) => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(INITIAL_STATE.authenticated);
   const exchangeCode = useCallback(async (code: string) => {
     const { data } = await axios.post('/proceedAuth', { code });
-    localStorage.setItem('tokens', data.tokens);
+    localStorage.setItem('tokens', JSON.stringify(data.tokens));
     setAuth(true);
   }, []);
 
