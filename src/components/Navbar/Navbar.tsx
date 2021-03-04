@@ -1,32 +1,17 @@
-import { Button, Col, Divider, Drawer, Menu, Row, Space } from 'antd';
-import { HomeOutlined, MenuOutlined } from '@ant-design/icons';
+import { Button, Col, Divider, Drawer, Row, Space } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import { Trans } from 'react-i18next';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint';
+import NavbarMenu from '../NavbarMenu/NavbarMenu';
 
 const Navbar = () => {
-  const location = useLocation();
   const screens = useBreakpoint();
   const small = screens.xs;
   const [drawerVisible, setDrawerVisibility] = useState(false);
 
-  const menu = (
-    <Menu
-      theme="dark"
-      mode={small ? 'inline' : 'horizontal'}
-      selectedKeys={[location.pathname]}
-    >
-      <Menu.Item key="/">
-        <Link to="/">
-          <HomeOutlined className="home-icon" />
-          <Trans>Home link</Trans>
-        </Link>
-      </Menu.Item>
-    </Menu>
-  );
   const rightPane = (
     <Space>
       <LangSwitcher></LangSwitcher>
@@ -37,6 +22,7 @@ const Navbar = () => {
       </Button>
     </Space>
   );
+
   if (small) {
     return (
       <>
@@ -49,7 +35,7 @@ const Navbar = () => {
           onClose={() => setDrawerVisibility(false)}
         >
           <Space direction="vertical">
-            {menu}
+            <NavbarMenu mode="inline" theme="light" />
             <Divider />
             {rightPane}
           </Space>
@@ -59,7 +45,9 @@ const Navbar = () => {
   }
   return (
     <Row>
-      <Col span={16}>{menu}</Col>
+      <Col span={16}>
+        <NavbarMenu />
+      </Col>
       <Col span={8} className="right-pane">
         {rightPane}
       </Col>
