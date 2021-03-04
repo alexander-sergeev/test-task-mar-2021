@@ -9,11 +9,13 @@ interface AuthContextState {
     picture: string;
     locale: string;
   };
+  logout: () => void;
 }
 
 const INITIAL_STATE: AuthContextState = {
   authenticated: localStorage.getItem('tokens') !== null,
   exchangeCode: async (code: string) => {},
+  logout: () => {},
 };
 
 const AuthContext = createContext<AuthContextState>(INITIAL_STATE);
@@ -29,12 +31,17 @@ export const AuthProvider = (props: AuthProviderProps) => {
     localStorage.setItem('tokens', JSON.stringify(data.tokens));
     setAuth(true);
   }, []);
+  const logout = useCallback(() => {
+    localStorage.removeItem('tokens');
+    setAuth(false);
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         authenticated: auth,
         exchangeCode,
+        logout,
       }}
     >
       {props.children}
