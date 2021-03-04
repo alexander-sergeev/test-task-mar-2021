@@ -1,25 +1,41 @@
-import { Button, Col, Divider, Drawer, Row, Space } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { Button, Col, Divider, Drawer, Row, Space, Spin } from 'antd';
+import { LoadingOutlined, MenuOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import './Navbar.css';
 import { Trans } from 'react-i18next';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint';
 import NavbarMenu from '../NavbarMenu/NavbarMenu';
+import { useAuth } from '../../contexts/AuthContext';
+import Avatar from 'antd/lib/avatar/avatar';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const screens = useBreakpoint();
   const small = screens.xs;
   const [drawerVisible, setDrawerVisibility] = useState(false);
+  const { authenticated, profile } = useAuth();
+
+  const user = authenticated ? (
+    <Link to="/profile">
+      <Avatar
+        className="avatar"
+        src={profile?.picture}
+        icon={<LoadingOutlined spin />}
+      />
+    </Link>
+  ) : (
+    <Button type="primary">
+      <a href="/login">
+        <Trans>Login link</Trans>
+      </a>
+    </Button>
+  );
 
   const rightPane = (
     <Space>
       <LangSwitcher></LangSwitcher>
-      <Button type="primary">
-        <a href="/login">
-          <Trans>Login link</Trans>
-        </a>
-      </Button>
+      {user}
     </Space>
   );
 

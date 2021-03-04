@@ -1,9 +1,11 @@
-.home-icon {
-  color: white;
-}
-
 .right-pane {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
