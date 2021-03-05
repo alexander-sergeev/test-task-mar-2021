@@ -37,6 +37,7 @@ export type AuthProviderProps = {
 
 export const AuthProvider = (props: AuthProviderProps) => {
   const [auth, setAuth] = useState(INITIAL_STATE.authenticated);
+  const { data, client } = useQuery(GET_USER);
   const exchangeCode = useCallback(async (code: string) => {
     const { data } = await axios.post('/proceedAuth', { code });
     localStorage.setItem('tokens', JSON.stringify(data.tokens));
@@ -44,9 +45,9 @@ export const AuthProvider = (props: AuthProviderProps) => {
   }, []);
   const logout = useCallback(() => {
     localStorage.removeItem('tokens');
+    client.resetStore();
     setAuth(false);
-  }, []);
-  const { data } = useQuery(GET_USER);
+  }, [client]);
 
   return (
     <AuthContext.Provider
