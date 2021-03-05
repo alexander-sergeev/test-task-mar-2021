@@ -10,12 +10,8 @@ import LoginCallback from './pages/LoginCallback/LoginCallback';
 import { LanguageConsumer, LanguageProvider } from './contexts/LanguageContext';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-
-const client = new ApolloClient({
-  uri: '/graphql',
-  cache: new InMemoryCache(),
-});
+import { ApolloProvider } from '@apollo/client';
+import { client } from './apollo';
 
 const App = () => {
   return (
