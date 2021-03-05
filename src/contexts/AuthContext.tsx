@@ -21,6 +21,7 @@ interface AuthContextState {
     locale: string;
   };
   logout: () => void;
+  lastLoginTime?: number;
 }
 
 const INITIAL_STATE: AuthContextState = {
@@ -38,9 +39,14 @@ export type AuthProviderProps = {
 export const AuthProvider = (props: AuthProviderProps) => {
   const [auth, setAuth] = useState(INITIAL_STATE.authenticated);
   const { data, client } = useQuery(GET_USER);
+  let lastLoginTime;
+  if (localStorage.getItem('lastLoginTime') != null) {
+    lastLoginTime = parseInt(localStorage.getItem('lastLoginTime') ?? '0', 10);
+  }
   const exchangeCode = useCallback(async (code: string) => {
     const { data } = await axios.post('/proceedAuth', { code });
     localStorage.setItem('tokens', JSON.stringify(data.tokens));
+    localStorage.setItem('lastLoginTime', String(Date.now()));
     setAuth(true);
   }, []);
   const logout = useCallback(() => {
@@ -56,6 +62,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
         exchangeCode,
         profile: data?.user,
         logout,
+        lastLoginTime,
       }}
     >
       {props.children}

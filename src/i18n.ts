@@ -18,6 +18,7 @@ const translations = {
       'Change language': 'Change language',
       "User's language": "User's language",
       Logout: 'Logout',
+      'Last login time': 'Last login time',
     },
   },
   ua: {
@@ -30,6 +31,7 @@ const translations = {
       'Change language': 'Змінити мову',
       "User's language": 'Мова користувача',
       Logout: 'Вийти',
+      'Last login time': 'Час останнього входу',
     },
   },
   ru: {
@@ -43,6 +45,7 @@ const translations = {
       'Change language': 'Сменить язык',
       "User's language": 'Язык пользователя',
       Logout: 'Выйти',
+      'Last login time': 'Время последнего входа',
     },
   },
 };
