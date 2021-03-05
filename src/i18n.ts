@@ -16,6 +16,8 @@ const translations = {
       'Allow access to geolocation': 'Please, allow access to your geolocation',
       'Error 404': 'Page not found | Error 404',
       'Change language': 'Change language',
+      "User's language": "User's language",
+      Logout: 'Logout',
     },
   },
   ua: {
@@ -26,6 +28,8 @@ const translations = {
       'Allow access to geolocation': 'Будь ласка, надайте доступ до геолокації',
       'Error 404': 'Сторінка не знайдена | Помилка 404',
       'Change language': 'Змінити мову',
+      "User's language": 'Мова користувача',
+      Logout: 'Вийти',
     },
   },
   ru: {
@@ -37,6 +41,8 @@ const translations = {
         'Пожалуйста, разрешите доступ к геолокации',
       'Error 404': 'Страница не найдена | Ошибка 404',
       'Change language': 'Сменить язык',
+      "User's language": 'Язык пользователя',
+      Logout: 'Выйти',
     },
   },
 };
