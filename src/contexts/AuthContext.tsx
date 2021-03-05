@@ -1,5 +1,16 @@
 import axios from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
+
+const GET_USER = gql`
+  {
+    user {
+      name
+      picture
+      locale
+    }
+  }
+`;
 
 interface AuthContextState {
   authenticated: boolean;
@@ -35,12 +46,14 @@ export const AuthProvider = (props: AuthProviderProps) => {
     localStorage.removeItem('tokens');
     setAuth(false);
   }, []);
+  const { data } = useQuery(GET_USER);
 
   return (
     <AuthContext.Provider
       value={{
         authenticated: auth,
         exchangeCode,
+        profile: data?.user,
         logout,
       }}
     >
