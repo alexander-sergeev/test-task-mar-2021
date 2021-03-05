@@ -1,18 +1,14 @@
-import { LoadingOutlined, LogoutOutlined } from '@ant-design/icons';
+import { LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Row, Typography } from 'antd';
 import React from 'react';
 import { Trans } from 'react-i18next';
-import CentredMessage from '../../components/CentredMessage/CentredMessage';
+import CenrtedSpinner from '../../components/CentredSpinner/CentredSpinner';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Profile = () => {
   const { profile, logout } = useAuth();
   if (profile == null) {
-    return (
-      <CentredMessage>
-        <LoadingOutlined style={{ fontSize: '72px' }} spin />
-      </CentredMessage>
-    );
+    return <CenrtedSpinner />;
   }
   return (
     // https://github.com/ant-design/ant-design/issues/10144
