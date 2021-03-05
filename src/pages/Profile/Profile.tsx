@@ -2,13 +2,13 @@ import { LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Row, Typography } from 'antd';
 import React from 'react';
 import { Trans } from 'react-i18next';
-import CenrtedSpinner from '../../components/CentredSpinner/CentredSpinner';
+import CentredSpinner from '../../components/CentredSpinner/CentredSpinner';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Profile = () => {
   const { profile, logout } = useAuth();
   if (profile == null) {
-    return <CenrtedSpinner />;
+    return <CentredSpinner />;
   }
   return (
     // https://github.com/ant-design/ant-design/issues/10144
