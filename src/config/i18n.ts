@@ -4,9 +4,11 @@ import en from './translations/en.json';
 import ua from './translations/ua.json';
 import ru from './translations/ru.json';
 
-const LOCAL_STORAGE_LANG_KEY = 'lang';
+export const LOCAL_STORAGE_LANG_KEY = 'lang';
 
-const localStorageLang = window.localStorage.getItem(LOCAL_STORAGE_LANG_KEY);
+export const localStorageLang = window.localStorage.getItem(
+  LOCAL_STORAGE_LANG_KEY,
+);
 const browserLang = window.navigator?.language.substr(0, 2).toLowerCase();
 const language = localStorageLang ?? browserLang;
 
@@ -37,14 +39,14 @@ export const LANGUAGES = [
   },
 ];
 
+export const isSupportedLanguage = (langCode: string) => {
+  return LANGUAGES.find(({ code }) => langCode === code) != null;
+};
+
 i18n.use(initReactI18next).init({
   resources: translations,
   lng: language,
   fallbackLng: 'en',
-});
-
-i18n.on('languageChanged', (lang) => {
-  localStorage.setItem(LOCAL_STORAGE_LANG_KEY, lang);
 });
 
 export default i18n;
