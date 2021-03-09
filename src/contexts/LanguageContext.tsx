@@ -7,7 +7,7 @@ interface LanguageContextState {
 }
 
 export const INITIAL_STATE: LanguageContextState = {
-  language: 'en',
+  language: i18n.language,
   changeLang: (lang: string) => {},
 };
 
