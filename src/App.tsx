@@ -11,7 +11,7 @@ import { LanguageConsumer, LanguageProvider } from './contexts/LanguageContext';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { ApolloProvider } from '@apollo/client';
-import { client } from './apollo';
+import { client } from './config/apollo';
 
 const App = () => {
   return (

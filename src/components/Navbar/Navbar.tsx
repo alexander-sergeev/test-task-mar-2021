@@ -1,4 +1,4 @@
-import { Button, Col, Divider, Drawer, Row, Space, Spin } from 'antd';
+import { Button, Col, Divider, Drawer, Row, Space } from 'antd';
 import { LoadingOutlined, MenuOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import './Navbar.css';

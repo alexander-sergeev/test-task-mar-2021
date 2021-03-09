@@ -2,7 +2,7 @@ import { Button, Dropdown, Menu } from 'antd';
 import React from 'react';
 import { Trans } from 'react-i18next';
 import { useLang } from '../../contexts/LanguageContext';
-import { LANGUAGES } from '../../i18n';
+import { LANGUAGES } from '../../config/i18n';
 
 const LangSwitcher = () => {
   const { changeLang } = useLang();

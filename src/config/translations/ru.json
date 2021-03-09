@@ -1,0 +1,11 @@
+{
+  "Home link": "Главная",
+  "Login link": "Войти",
+  "Your position on map": "Ваше текущее местоположение",
+  "Allow access to geolocation": "Пожалуйста, разрешите доступ к геолокации",
+  "Error 404": "Страница не найдена | Ошибка 404",
+  "Change language": "Сменить язык",
+  "User's language": "Язык пользователя",
+  "Logout": "Выйти",
+  "Last login time": "Время последнего входа"
+}
