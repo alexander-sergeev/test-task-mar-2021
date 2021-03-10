@@ -38,7 +38,7 @@ export type AuthProviderProps = {
 
 export const AuthProvider = (props: AuthProviderProps) => {
   const [auth, setAuth] = useState(INITIAL_STATE.authenticated);
-  const { data, client } = useQuery(GET_USER);
+  const { data, client } = useQuery(GET_USER, { skip: !auth });
 
   let lastLoginTime;
   const storedLastLoginTime = localStorage.getItem('lastLoginTime');
