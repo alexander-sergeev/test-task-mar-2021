@@ -1,5 +1,11 @@
 import axios from 'axios';
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_USER = gql`
@@ -61,6 +67,13 @@ export const AuthProvider = (props: AuthProviderProps) => {
     client.resetStore();
     setAuth(false);
   }, [client]);
+
+  useEffect(() => {
+    // Server returned that we are not authenticated
+    if (auth && data != null && data.user == null) {
+      logout();
+    }
+  }, [auth, data, logout]);
 
   return (
     <AuthContext.Provider

@@ -14,11 +14,18 @@ export const server = new ApolloServer({
     const token = ctx.req.headers.authorization.replace('Bearer ', '');
     const oAuth2Client = getGoogleOauthClient();
     oAuth2Client.setCredentials({ access_token: token });
-    const { data } = await oAuth2Client.request({
-      url: GOOGLE_API_USERINFO_ENDPOINT,
-    });
-    return {
-      user: data,
-    };
+    try {
+      const { data } = await oAuth2Client.request({
+        url: GOOGLE_API_USERINFO_ENDPOINT,
+      });
+      return {
+        user: data,
+      };
+    } catch (err) {
+      if (err.response.status === 401) {
+        return {};
+      }
+      throw err;
+    }
   },
 });
