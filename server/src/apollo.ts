@@ -1,4 +1,4 @@
-import { ApolloServer } from 'apollo-server-koa';
+import { ApolloServer, AuthenticationError } from 'apollo-server-koa';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 import { GOOGLE_API_USERINFO_ENDPOINT } from './constants';
@@ -9,7 +9,7 @@ export const server = new ApolloServer({
   resolvers,
   context: async ({ ctx }) => {
     if (!ctx.req.headers.authorization) {
-      return {};
+      throw new AuthenticationError('Authorization header is not provided');
     }
     const token = ctx.req.headers.authorization.replace('Bearer ', '');
     const oAuth2Client = getGoogleOauthClient();
@@ -23,7 +23,7 @@ export const server = new ApolloServer({
       };
     } catch (err) {
       if (err.response.status === 401) {
-        return {};
+        throw new AuthenticationError('Provided token is invalid');
       }
       throw err;
     }
