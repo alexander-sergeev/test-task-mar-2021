@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { gql, useQuery } from '@apollo/client';
+import { clearTokens, getTokens, setTokens } from '../utils/tokens';
 
 const GET_USER = gql`
   {
@@ -31,7 +32,7 @@ interface AuthContextState {
 }
 
 const INITIAL_STATE: AuthContextState = {
-  authenticated: localStorage.getItem('tokens') !== null,
+  authenticated: getTokens() != null,
   exchangeCode: async (code: string) => {},
   logout: () => {},
 };
@@ -55,7 +56,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
   const exchangeCode = useCallback(
     async (code: string) => {
       const { data } = await axios.post('/proceedAuth', { code });
-      localStorage.setItem('tokens', JSON.stringify(data.tokens));
+      setTokens(data.tokens);
       localStorage.setItem('lastLoginTime', String(Date.now()));
       setAuth(true);
       client.resetStore();
@@ -63,7 +64,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
     [client],
   );
   const logout = useCallback(() => {
-    localStorage.removeItem('tokens');
+    clearTokens();
     client.resetStore();
     setAuth(false);
   }, [client]);

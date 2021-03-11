@@ -8,19 +8,19 @@ import { setContext } from '@apollo/client/link/context';
 import { GraphQLError } from 'graphql';
 import { onError } from '@apollo/client/link/error';
 import axios from 'axios';
+import { getAccessToken, getTokens, setTokens } from '../utils/tokens';
 
 const httpLink = new HttpLink({ uri: '/graphql' });
 
 const authLink = setContext((_, { headers }) => {
-  const rawTokens = localStorage.getItem('tokens');
-  if (rawTokens == null) {
+  const token = getAccessToken();
+  if (token == null) {
     return {};
   }
-  const accessToken = JSON.parse(rawTokens).access_token;
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 });
@@ -34,10 +34,10 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     return fromPromise(
       axios
         .post('/refreshToken', {
-          tokens: JSON.parse(localStorage.getItem('tokens')!),
+          tokens: getTokens(),
         })
         .then(({ data }) => {
-          localStorage.setItem('tokens', JSON.stringify(data.credentials));
+          setTokens(data.credentials);
 
           const oldHeaders = operation.getContext().headers;
           operation.setContext({
