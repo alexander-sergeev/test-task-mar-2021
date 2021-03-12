@@ -69,13 +69,6 @@ export const AuthProvider = (props: AuthProviderProps) => {
     setAuth(false);
   }, [client]);
 
-  useEffect(() => {
-    // Server returned that we are not authenticated
-    if (auth && data != null && data.user == null) {
-      logout();
-    }
-  }, [auth, data, logout]);
-
   return (
     <AuthContext.Provider
       value={{
