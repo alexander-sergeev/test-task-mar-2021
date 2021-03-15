@@ -9,19 +9,20 @@ import { setContext } from '@apollo/client/link/context';
 import { GraphQLError } from 'graphql';
 import { onError } from '@apollo/client/link/error';
 import axios from 'axios';
-import { getAccessToken, getTokens, setTokens } from '../utils/tokens';
+import { getTokens, setTokens } from '../utils/tokens';
 
 const httpLink = new HttpLink({ uri: '/graphql' });
 
 const authLink = setContext((_, { headers }) => {
-  const token = getAccessToken();
+  const token = getTokens();
   if (token == null) {
     return {};
   }
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.access_token}`,
+      'x-authentication': token.id_token,
     },
   };
 });
