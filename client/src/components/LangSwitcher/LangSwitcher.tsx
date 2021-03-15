@@ -3,16 +3,18 @@ import React from 'react';
 import { Trans } from 'react-i18next';
 import { useLang } from '../../contexts/LanguageContext';
 import { LANGUAGES } from '../../config/i18n';
+import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
 const LangSwitcher = () => {
   const { changeLang } = useLang();
 
+  const onLangClick: MenuClickEventHandler = (event) =>
+    changeLang(event.key.toString());
+
   const langMenu = (
-    <Menu>
+    <Menu onClick={onLangClick}>
       {LANGUAGES.map(({ name, code }) => (
-        <Menu.Item onClick={() => changeLang(code)} key={code}>
-          {name}
-        </Menu.Item>
+        <Menu.Item key={code}>{name}</Menu.Item>
       ))}
     </Menu>
   );
