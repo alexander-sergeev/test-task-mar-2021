@@ -1,11 +1,5 @@
 import axios from 'axios';
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { clearTokens, getTokens, setTokens } from '../utils/tokens';
 

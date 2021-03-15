@@ -1,5 +1,6 @@
 import {
   ApolloClient,
+  from,
   fromPromise,
   HttpLink,
   InMemoryCache,
@@ -60,7 +61,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   }
 });
 
-const link = errorLink.concat(authLink).concat(httpLink);
+const link = from([errorLink, authLink, httpLink]);
 
 export const client = new ApolloClient({
   link,
