@@ -4,20 +4,9 @@ import typeDefs from './typeDefs';
 import {
   GOOGLE_API_TOKENINFO_ENDPOINT,
   GOOGLE_API_USERINFO_ENDPOINT,
+  ID_TOKEN_HTTP_HEADER_NAME,
 } from './constants';
 import getGoogleOauthClient from './utils/getGoogleOauthClient';
-
-interface TokenInfo {
-  azp: string;
-  aud: string;
-  sub: string;
-  scope: string;
-  exp: string;
-  expires_in: string;
-  email: string;
-  email_verified: string;
-  access_type: string;
-}
 
 export const server = new ApolloServer({
   typeDefs,
@@ -26,29 +15,27 @@ export const server = new ApolloServer({
     if (!ctx.req.headers.authorization) {
       throw new AuthenticationError('Authorization header is not provided');
     }
-    const token = ctx.req.headers.authorization.replace('Bearer ', '');
+    if (!ctx.req.headers[ID_TOKEN_HTTP_HEADER_NAME]) {
+      throw new AuthenticationError('ID Token is not provided');
+    }
+    const accessToken = ctx.req.headers.authorization.replace('Bearer ', '');
+    const idToken = ctx.req.headers[ID_TOKEN_HTTP_HEADER_NAME];
     const oAuth2Client = getGoogleOauthClient();
-    oAuth2Client.setCredentials({ access_token: token });
     try {
-      const {
-        data: tokenInfo,
-      }: { data: TokenInfo } = await oAuth2Client.request({
-        url: GOOGLE_API_TOKENINFO_ENDPOINT,
+      const loginTicket = await oAuth2Client.verifyIdToken({
+        idToken,
+        audience: process.env.GOOGLE_CLIENT_ID,
       });
-      if (tokenInfo.aud != process.env.GOOGLE_CLIENT_ID) {
-        throw new Error('Token audience mismatch');
-      }
-      const { data: userData } = await oAuth2Client.request({
-        url: GOOGLE_API_USERINFO_ENDPOINT,
-      });
+      const tokenPayload = loginTicket.getPayload();
       return {
-        user: userData,
+        user: {
+          name: tokenPayload?.name,
+          picture: tokenPayload?.picture,
+          locale: tokenPayload?.locale,
+        },
       };
     } catch (err) {
-      if (err.response.status === 400 || err.response.status === 401) {
-        throw new AuthenticationError('Provided token is invalid');
-      }
-      throw err;
+      throw new AuthenticationError('Provided ID Token is invalid');
     }
   },
 });
