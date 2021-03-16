@@ -9,7 +9,9 @@ export const LOCAL_STORAGE_LANG_KEY = 'lang';
 export const localStorageLang = window.localStorage.getItem(
   LOCAL_STORAGE_LANG_KEY,
 );
-const browserLang = window.navigator?.language.substr(0, 2).toLowerCase();
+export const browserLang = window.navigator?.language
+  .substr(0, 2)
+  .toLowerCase();
 const language = localStorageLang ?? browserLang;
 
 const translations = {

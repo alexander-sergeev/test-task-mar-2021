@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import i18n, {
+  browserLang,
   isSupportedLanguage,
   localStorageLang,
   LOCAL_STORAGE_LANG_KEY,
@@ -38,12 +39,13 @@ export const LanguageProvider = (props: LanguageProviderProps) => {
   };
 
   useEffect(() => {
-    if (
-      profile != null &&
-      isSupportedLanguage(profile.locale) &&
-      !localStorageLang
-    ) {
+    if (localStorageLang != null) {
+      return;
+    }
+    if (profile != null && isSupportedLanguage(profile.locale)) {
       changeLang(profile.locale, false);
+    } else {
+      changeLang(browserLang);
     }
   }, [profile]);
 
