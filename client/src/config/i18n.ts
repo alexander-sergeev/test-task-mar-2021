@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from './translations/en.json';
-import ua from './translations/ua.json';
+import uk from './translations/uk.json';
 import ru from './translations/ru.json';
 
 export const LOCAL_STORAGE_LANG_KEY = 'lang';
@@ -16,8 +16,8 @@ const translations = {
   en: {
     translation: en,
   },
-  ua: {
-    translation: ua,
+  uk: {
+    translation: uk,
   },
   ru: {
     translation: ru,
@@ -31,7 +31,7 @@ export const LANGUAGES = [
   },
   {
     name: 'Українська',
-    code: 'ua',
+    code: 'uk',
   },
   {
     name: 'Русский',
