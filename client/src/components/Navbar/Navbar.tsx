@@ -9,6 +9,7 @@ import NavbarMenu from '../NavbarMenu/NavbarMenu';
 import { useAuth } from '../../contexts/AuthContext';
 import Avatar from 'antd/lib/avatar/avatar';
 import { Link } from 'react-router-dom';
+import LangDisplay from '../LangDisplay/LangDisplay';
 
 const Navbar = () => {
   const screens = useBreakpoint();
@@ -34,6 +35,7 @@ const Navbar = () => {
 
   const rightPane = (
     <Space>
+      <LangDisplay></LangDisplay>
       <LangSwitcher></LangSwitcher>
       {user}
     </Space>
