@@ -8,12 +8,12 @@ import { useAuth } from './AuthContext';
 
 interface LanguageContextState {
   language: string;
-  changeLang: (lang: string) => void;
+  changeLang: (lang: string, storeChoice: boolean) => void;
 }
 
 export const INITIAL_STATE: LanguageContextState = {
   language: i18n.language,
-  changeLang: (lang: string) => {},
+  changeLang: (lang: string, storeChoice: boolean) => {},
 };
 
 const LanguageContext = createContext<LanguageContextState>(INITIAL_STATE);
@@ -26,9 +26,11 @@ export const LanguageProvider = (props: LanguageProviderProps) => {
   const [state, setState] = useState(INITIAL_STATE);
   const { profile } = useAuth();
 
-  const changeLang = (lang: string) => {
+  const changeLang = (lang: string, storeChoice = false) => {
     i18n.changeLanguage(lang);
-    localStorage.setItem(LOCAL_STORAGE_LANG_KEY, lang);
+    if (storeChoice) {
+      localStorage.setItem(LOCAL_STORAGE_LANG_KEY, lang);
+    }
     setState((s) => ({
       ...s,
       language: lang,
@@ -41,7 +43,7 @@ export const LanguageProvider = (props: LanguageProviderProps) => {
       isSupportedLanguage(profile.locale) &&
       !localStorageLang
     ) {
-      changeLang(profile.locale);
+      changeLang(profile.locale, false);
     }
   }, [profile]);
 

@@ -9,7 +9,7 @@ const LangSwitcher = () => {
   const { changeLang } = useLang();
 
   const onLangClick: MenuClickEventHandler = (event) =>
-    changeLang(event.key.toString());
+    changeLang(event.key.toString(), true);
 
   const langMenu = (
     <Menu onClick={onLangClick}>
