@@ -47,19 +47,15 @@ export const AuthProvider = (props: AuthProviderProps) => {
     lastLoginTime = parseInt(storedLastLoginTime, 10);
   }
 
-  const exchangeCode = useCallback(
-    async (code: string) => {
-      const { data } = await axios.post('/proceedAuth', { code });
-      setTokens(data.tokens);
-      localStorage.setItem('lastLoginTime', String(Date.now()));
-      setAuth(true);
-      client.resetStore();
-    },
-    [client],
-  );
+  const exchangeCode = useCallback(async (code: string) => {
+    const { data } = await axios.post('/proceedAuth', { code });
+    setTokens(data.tokens);
+    localStorage.setItem('lastLoginTime', String(Date.now()));
+    setAuth(true);
+  }, []);
   const logout = useCallback(() => {
     clearTokens();
-    client.resetStore();
+    client.clearStore();
     setAuth(false);
   }, [client]);
 
