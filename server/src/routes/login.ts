@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import getGoogleOauthClient from '../utils/getGoogleOauthClient';
 
-const handler = async (ctx: Koa.Context) => {
+const handler = async (ctx: Koa.Context): Promise<void> => {
   const oAuth2Client = getGoogleOauthClient();
   const url = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
