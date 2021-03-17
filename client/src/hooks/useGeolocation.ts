@@ -15,11 +15,12 @@ export interface GeolocationState {
   readonly lng?: number;
 }
 
+const INITIAL_STATE: GeolocationState = {
+  allowed: false,
+};
+
 const useGeolocation = (): GeolocationState => {
-  const initialState: GeolocationState = {
-    allowed: false,
-  };
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(INITIAL_STATE);
 
   useEffect(() => {
     let canceled = false;
@@ -40,7 +41,7 @@ const useGeolocation = (): GeolocationState => {
           return;
         }
         // TODO: Currently it treat any error as user disallowed access, should handle errors properly
-        setState(initialState);
+        setState(INITIAL_STATE);
       },
       {
         enableHighAccuracy: true,
@@ -50,7 +51,7 @@ const useGeolocation = (): GeolocationState => {
     return () => {
       canceled = true;
     };
-  });
+  }, []);
 
   return state;
 };
