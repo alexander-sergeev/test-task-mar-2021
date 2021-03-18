@@ -7,5 +7,6 @@
   "Change language": "Змінити мову",
   "User's language": "Мова користувача",
   "Logout": "Вийти",
-  "Last login time": "Час останнього входу"
+  "Last login time": "Час останнього входу",
+  "Error on getting your geoposition": "Помилка під час отримання вашого місцерозташування"
 }

@@ -7,5 +7,6 @@
   "Change language": "Сменить язык",
   "User's language": "Язык пользователя",
   "Logout": "Выйти",
-  "Last login time": "Время последнего входа"
+  "Last login time": "Время последнего входа",
+  "Error on getting your geoposition": "Ошибка при получении вашего местоположения"
 }
