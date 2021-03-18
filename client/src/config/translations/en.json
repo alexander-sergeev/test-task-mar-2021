@@ -8,5 +8,7 @@
   "User's language": "User's language",
   "Logout": "Logout",
   "Last login time": "Last login time",
-  "Error on getting your geoposition": "Error on getting your geoposition"
+  "Permission denied to geolocation": "We can't access your location because you have denied access to it. Please, allow Location access.",
+  "Geolocation unavailable": "Your geoposition is currently unavailable due to internal error. Please, try again by reloading page.",
+  "Geolocation timeout": "Your geoposition is unavailable due to timeout. Try again later."
 }
