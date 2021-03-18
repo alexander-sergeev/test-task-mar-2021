@@ -5,6 +5,7 @@ import { useGeolocation } from 'react-use';
 import googleMapReact from 'google-map-react';
 import { Alert } from 'antd';
 import './Home.css';
+import logger from '../../config/logger';
 
 /**
  *  Map zoom which used when we don't know user location
@@ -59,6 +60,7 @@ const Home = () => {
         bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY }}
         center={coords || DEFAULT_COORDS}
         zoom={coords ? LOCATION_MAP_ZOOM : DEFAULT_MAP_ZOOM}
+        onGoogleApiLoaded={() => logger.debug(`Google Maps API loaded`)}
       >
         {coords !== null && (
           <MapMarker

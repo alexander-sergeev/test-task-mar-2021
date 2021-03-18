@@ -5,6 +5,7 @@ import i18n, {
   localStorageLang,
   LOCAL_STORAGE_LANG_KEY,
 } from '../config/i18n';
+import logger from '../config/logger';
 import { useAuth } from './AuthContext';
 
 interface LanguageContextState {
@@ -28,6 +29,7 @@ export const LanguageProvider = (props: LanguageProviderProps) => {
   const { profile } = useAuth();
 
   const changeLang = (lang: string, storeChoice = false) => {
+    logger.debug(`Change language called`, { lang, storeChoice });
     i18n.changeLanguage(lang);
     if (storeChoice) {
       localStorage.setItem(LOCAL_STORAGE_LANG_KEY, lang);
@@ -39,6 +41,11 @@ export const LanguageProvider = (props: LanguageProviderProps) => {
   };
 
   useEffect(() => {
+    logger.debug(`useEffect@LanguageContext, 'profile' changed`, {
+      localStorageLang,
+      browserLang,
+      profileLocale: profile?.locale,
+    });
     if (localStorageLang != null) {
       return;
     }

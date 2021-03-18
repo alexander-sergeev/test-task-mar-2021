@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { clearTokens, getTokens, setTokens } from '../utils/tokens';
+import logger from '../config/logger';
 
 const GET_USER = gql`
   {
@@ -48,12 +49,15 @@ export const AuthProvider = (props: AuthProviderProps) => {
   }
 
   const exchangeCode = useCallback(async (code: string) => {
+    logger.info(`Exchanging one-time auth code for tokens`);
     const { data } = await axios.post('/proceedAuth', { code });
     setTokens(data.tokens);
     localStorage.setItem('lastLoginTime', String(Date.now()));
     setAuth(true);
+    logger.info(`Exchange complete, we're authenticated now`);
   }, []);
   const logout = useCallback(() => {
+    logger.info(`Logging out`);
     clearTokens();
     client.clearStore();
     setAuth(false);
