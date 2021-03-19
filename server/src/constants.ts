@@ -5,3 +5,5 @@ export const GOOGLE_API_TOKENINFO_ENDPOINT =
 export const ID_TOKEN_HTTP_HEADER_NAME = 'x-authentication';
 
 export const LOG_LEVEL = 'debug';
+
+export const GRAPHQL_PATH = '/graphql';

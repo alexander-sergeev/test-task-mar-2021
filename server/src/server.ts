@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import { server as apolloServer } from './apollo';
 import { router } from './routes';
 import logger, { koaFormatFromCtx } from './logger';
 
@@ -15,8 +14,6 @@ app.use(async (ctx: Koa.Context, next: Koa.Next) => {
     logger.error(err, koaFormatFromCtx(ctx));
   }
 });
-
-app.use(apolloServer.getMiddleware());
 
 app.use(bodyParser());
 app.use(router.routes());
