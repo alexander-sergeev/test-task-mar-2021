@@ -1,19 +1,14 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
+import { errorHandler } from './middlewares/errorHandler';
+import { logMiddleware } from './middlewares/logMiddleware';
 import { router } from './routes';
-import logger, { koaFormatFromCtx } from './utils/logger';
+import logger from './utils/logger';
 
 const app = new Koa();
 
-app.use(async (ctx: Koa.Context, next: Koa.Next) => {
-  try {
-    await next();
-    logger.info(koaFormatFromCtx(ctx));
-  } catch (err) {
-    ctx.status = ctx.status ?? 500;
-    logger.error(err, koaFormatFromCtx(ctx));
-  }
-});
+app.use(errorHandler);
+app.use(logMiddleware);
 
 app.use(bodyParser());
 app.use(router.routes());
