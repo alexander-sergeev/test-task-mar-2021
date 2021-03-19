@@ -4,9 +4,9 @@ import {
   fromPromise,
   HttpLink,
   InMemoryCache,
+  ServerError,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { GraphQLError } from 'graphql';
 import { onError } from '@apollo/client/link/error';
 import axios from 'axios';
 import { getTokens, setTokens } from '../utils/tokens';
@@ -36,11 +36,7 @@ const errorLink = onError(
     if (networkError) {
       logger.error(`GraphQL Network Error`, networkError.message);
     }
-    if (
-      graphQLErrors?.some(
-        (e: GraphQLError) => e.extensions?.code === 'UNAUTHENTICATED',
-      )
-    ) {
+    if ((networkError as ServerError)?.statusCode === 401) {
       logger.info('Refreshing auth tokens');
       return fromPromise(
         axios
