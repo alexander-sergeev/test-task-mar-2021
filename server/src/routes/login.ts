@@ -1,9 +1,8 @@
 import Koa from 'koa';
-import getGoogleOauthClient from '../utils/getGoogleOauthClient';
+import { generateAuthUrl } from '../utils/googleOauth';
 
 const handler = async (ctx: Koa.Context): Promise<void> => {
-  const oAuth2Client = getGoogleOauthClient();
-  const url = oAuth2Client.generateAuthUrl({
+  const url = generateAuthUrl({
     access_type: 'offline',
     scope: 'profile email openid',
     prompt: 'consent',

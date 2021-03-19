@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import getGoogleOauthClient from '../utils/getGoogleOauthClient';
+import { verifyIdToken } from '../utils/googleOauth';
 import logger from '../logger';
 import { ID_TOKEN_HTTP_HEADER_NAME } from '../constants';
 
@@ -21,9 +21,8 @@ export const requireAuth: Koa.Middleware = async (
     ctx.status = 401;
     throw new Error('ID Token is not provided');
   }
-  const oAuth2Client = getGoogleOauthClient();
   try {
-    const loginTicket = await oAuth2Client.verifyIdToken({
+    const loginTicket = await verifyIdToken({
       idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
