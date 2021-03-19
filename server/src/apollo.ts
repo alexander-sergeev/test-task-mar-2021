@@ -3,10 +3,12 @@ import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 import { ID_TOKEN_HTTP_HEADER_NAME } from './constants';
 import getGoogleOauthClient from './utils/getGoogleOauthClient';
+import { LogPlugin } from './utils/ApolloLogPlugin';
 
 export const server = new ApolloServer({
   typeDefs,
   resolvers,
+  plugins: [LogPlugin],
   context: async ({ ctx }) => {
     if (!ctx.req.headers.authorization) {
       throw new AuthenticationError('Authorization header is not provided');
