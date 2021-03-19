@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import { verifyIdToken } from '../utils/googleOauth';
-import logger from '../logger';
+import logger from '../utils/logger';
 import { ID_TOKEN_HTTP_HEADER_NAME } from '../constants';
 
 /**

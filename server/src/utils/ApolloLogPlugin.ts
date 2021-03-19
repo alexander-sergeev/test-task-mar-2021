@@ -1,4 +1,4 @@
-import logger from '../logger';
+import logger from '../utils/logger';
 import type { PluginDefinition } from 'apollo-server-core';
 import type { GraphQLRequestContext } from 'apollo-server-types';
 

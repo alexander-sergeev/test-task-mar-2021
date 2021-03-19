@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import { router } from './routes';
-import logger, { koaFormatFromCtx } from './logger';
+import logger, { koaFormatFromCtx } from './utils/logger';
 
 const app = new Koa();
 
