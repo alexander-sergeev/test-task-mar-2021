@@ -4,18 +4,19 @@ import logger from '../utils/logger';
 import { ID_TOKEN_HTTP_HEADER_NAME } from '../constants';
 
 /**
- * Koa middleware, checks for authorization and injects user info into context state.
- * If user is not authenticated, end request with 401 error
+ * Koa middleware, injects user info into context state in `user` property.
+ * If user is not authenticated, injects `null`.
+ * If user provided auth and id token, but validation failed - throws 401 error
  */
-export const requireAuth: Koa.Middleware = async (
+export const userMiddleware: Koa.Middleware = async (
   ctx: Koa.Context,
   next: Koa.Next,
 ) => {
   const authorizationHeader = ctx.req.headers.authorization;
   const idToken = ctx.req.headers[ID_TOKEN_HTTP_HEADER_NAME];
   if (!authorizationHeader) {
-    ctx.status = 401;
-    throw new Error('Authorization header is not provided');
+    ctx.state.user = null;
+    return next();
   }
   if (typeof idToken !== 'string') {
     ctx.status = 401;

@@ -9,15 +9,8 @@ export const server = new ApolloServer({
   resolvers,
   plugins: [LogPlugin],
   context: async ({ ctx }: { ctx: Koa.Context }) => {
-    if (!ctx.state.user) {
-      throw new Error(
-        'No user property in ctx state passed to Apollo context middleware',
-      );
-    }
     return {
-      user: {
-        ...ctx.state.user,
-      },
+      user: ctx.state.user ? { ...ctx.state.user } : null,
     };
   },
 });
