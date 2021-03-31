@@ -8,17 +8,23 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/index.js",
-    "start:dev": "nodemon -w src -x ts-node src/index.ts",
-    "lint": "eslint ./src"
+    "start:dev": "concurrently \"nodemon -w src -x ts-node src/index.ts\" \"npm run codegen:dev\"",
+    "lint": "eslint ./src",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen:dev": "graphql-codegen --config codegen.yml --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.3",
+    "@graphql-codegen/typescript": "1.21.1",
+    "@graphql-codegen/typescript-resolvers": "1.19.0",
     "@types/koa-router": "^7.4.1",
     "@types/node": "^14.14.31",
     "@types/pino": "^6.3.6",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
+    "concurrently": "^6.0.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -28,7 +34,8 @@
   },
   "eslintConfig": {
     "ignorePatterns": [
-      "/dist/"
+      "/dist/",
+      "/src/graphql-types.ts"
     ],
     "parser": "@typescript-eslint/parser",
     "extends": [

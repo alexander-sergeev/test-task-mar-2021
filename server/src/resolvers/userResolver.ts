@@ -1,8 +1,9 @@
-import { IResolvers } from 'apollo-server-koa';
+import { Context } from '../apollo';
+import { Resolvers, User } from '../graphql-types';
 
-const resolvers: IResolvers = {
+const resolvers: Resolvers = {
   Query: {
-    user: (_parent: any, _args: any, context: any) => {
+    user: (parent, args, context: Context): User | null => {
       if (!context.user) {
         return null;
       }
